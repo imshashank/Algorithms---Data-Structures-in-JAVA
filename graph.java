@@ -3,8 +3,32 @@
  * Class: CSE 5331
  * Foundations II : DS & Algo
  */
-import java.util.ArrayList;
-import java.util.Stack;
+ 
+ /*
+ The  program will accept input in the following format:
+  Class1.java::Edit Class1.java
+  Class1.class:Class1.java:javac Class1.java
+  Class2.java::Edit Class2.java
+  Class2.class:Class2.java:javac Class2.java
+  MyApp.jar:Class1.class Class2.class:jar cvf *.class
+  Each line above has three parts – a target name, a list of targets that must be built before this target, and a command that is used to generate the target. Targets can have zero or more dependencies. In the example above, Class1.java has no dependencies, and MyApp.jar has two – it needs both Class1.class and Class2.class to exist before it can be built.
+  Your program will be responsible for parsing this input and creating a graph in memory. It will manipulate the graph to produce a list of commands that need to be executed to produce a given target. For example, the list of commands that must be executed to produce Class1.class is:
+  Edit Class1.java
+  javac Class1.java
+  This is the only acceptable list of commands in this case. Notice that there will not always be a unique correct answer. If we list the commands needed to produce MyApp.jar, there are several sequences that can work. Two of these would be:
+  Edit Class1.java
+  javac Class1.java
+  Edit Class2.java
+  javac Class2.java
+  jar cvf *.class
+  and
+  Edit Class1.java
+  Edit Class2.java
+  javac Class1.java
+  javac Class2.java
+ */
+  import java.util.ArrayList;
+  import java.util.Stack;
 
 public class Builder
 {
