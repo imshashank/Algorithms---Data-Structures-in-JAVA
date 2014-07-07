@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Hashtable;
 
+
 public class identicalFile {
 
 	/**
@@ -20,7 +21,7 @@ public class identicalFile {
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 		// TODO Auto-generated method stub
 		//add the directory to be checked for identical files, it  check the sub-directories
-		System.out.println(getFiles("Z:\\eclipse"));
+		System.out.println(getFiles("Pics"));
 	}
 	public static String[] getFiles(String path) throws NoSuchAlgorithmException, IOException{
 	
@@ -28,7 +29,9 @@ public class identicalFile {
 	File folder = new File(path);
 	File[] listOfFiles = folder.listFiles();
 	String hash_val;
+	String file_path;
 	    for (int i = 0; i < listOfFiles.length; i++) {
+
 	    	String filename= listOfFiles[i].getName();
 	    	//skipping files JAVA program can't read and files starting with "."
 	      if (listOfFiles[i].isFile() && listOfFiles[i].canRead() && filename.charAt(0) != '.') {
@@ -39,7 +42,29 @@ public class identicalFile {
 	    	  if(files.get(hash_val)==null){
 	    	  files.put(hash_val, listOfFiles[i].getName());
 	    	  }
-	    	  else System.out.println("Duplicate file at:" + listOfFiles[i].getAbsolutePath());
+	    	  else {
+	    	  	System.out.println("Duplicate file at:" + listOfFiles[i].getAbsolutePath());
+	    	 	 file_path = listOfFiles[i].getAbsolutePath();
+	    	 	 System.out.println(file_path);
+			    	 	 try{
+		 
+		    		File file = new File(file_path);
+		 
+		    		if(file.delete()){
+		    			System.out.println(file.getName() + " is deleted!");
+		    		}else{
+		    			System.out.println("Delete operation is failed.");
+		    		}
+		 
+		    	}catch(Exception e){
+		 
+		    		e.printStackTrace();
+		 
+		    	}
+ 
+
+	    	 	}
+	    	 
 	        //System.out.println("File " + listOfFiles[i].getName());
 	      } else if (listOfFiles[i].isDirectory()) {
 	        //System.out.println("Directory " + listOfFiles[i].getName());
